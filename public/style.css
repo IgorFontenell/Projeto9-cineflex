@@ -53,3 +53,23 @@ h2 {
 .poster:hover {
     cursor: pointer;
 }
+.data {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.hours {
+    display: flex;
+}
+.hour {
+    background-color: #E8833A;
+    width: 43px;
+    height: 83px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
