@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import styled from "styled-components"
 import axios from "axios";
 import React from "react";
 import FilmDay from "./FilmDay";
@@ -24,16 +25,34 @@ export default function FilmDays () {
 
     return(
         (filmInfo === 0) ? 
-            (<div className="container">
+            (<Container>
                 <h2>Selecione o horário</h2>
                 <h2>Imagem Carregando.....</h2>
-            </div>) : (
-                    <div className="container">
+            </Container>) : (
+                    <Container>
                         <h2>Selecione o horário</h2>
                        {filmInfo.days.map((value, index) => <FilmDay key={index} weekday={value.weekday} date={value.date} showtime1={value.showtimes[0].name} showtime2={value.showtimes[1].name} />)}
                         <Footer title={title} posterURL={posterURL}/>
-                </div>
+                </Container>
             )
         
     );
 }
+
+const Container = styled.div`
+
+    margin-top: 68px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 117px;
+
+    h2 {
+    display: inline-block;
+    margin: 20px 0px;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+
+    }
+`;

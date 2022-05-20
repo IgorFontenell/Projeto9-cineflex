@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-
+import styled from "styled-components";
 
 
 import Film from "./Film";
@@ -23,16 +23,40 @@ export default function Films () {
 
    
     return (
-        <div className="container">
+        <Container>
             <h2>Selecione o filme</h2>
-            <ul className="posters">
+            <Posters>
                {film.map((value, index) => <Film id={value.id} key={index} posterURL={value.posterURL}/>)}
-            </ul>
-            
-            
-        </div>
+            </Posters>
+        </Container>
     );
 
 
 
 }
+
+const Container = styled.div`
+
+    margin-top: 68px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 117px;
+
+    h2 {
+    display: inline-block;
+    margin: 20px 0px;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+
+    }
+`;
+
+const Posters = styled.ul`
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+`;
