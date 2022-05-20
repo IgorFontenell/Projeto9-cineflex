@@ -26,7 +26,7 @@ export default function Films () {
         <div className="container">
             <h2>Selecione o filme</h2>
             <ul className="posters">
-               {film.map((value, index) => <Film key={index} posterURL={value.posterURL}/>)}
+               {film.map((value, index) => <Film id={value.id} key={index} posterURL={value.posterURL}/>)}
             </ul>
             
             

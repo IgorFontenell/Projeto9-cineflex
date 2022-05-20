@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import React from "react";
 import FilmDay from "./FilmDay";
+import Footer from "./Footer";
 
 
 
@@ -18,7 +19,8 @@ export default function FilmDays () {
         promise.then(ansewerBack => setFilmInfo({...ansewerBack.data}));
     }),[])
     console.log(filmInfo);
-    const { weekday, date, showtimes: [hour1, hour2] } = filmInfo
+    const { posterURL, title } = filmInfo;
+   
 
     return(
         (filmInfo === 0) ? 
@@ -28,13 +30,8 @@ export default function FilmDays () {
             </div>) : (
                     <div className="container">
                         <h2>Selecione o horário</h2>
-                        <FilmDay weekday={weekday} date={date} hour1={hour1} hour2={hour2} />
-                        <FilmDay />
-                        <FilmDay />
-                        <FilmDay />
-                        <FilmDay />
-                        <FilmDay />
-        
+                       {filmInfo.days.map((value, index) => <FilmDay key={index} weekday={value.weekday} date={value.date} showtime1={value.showtimes[0].name} showtime2={value.showtimes[1].name} />)}
+                        <Footer title={title} posterURL={posterURL}/>
                 </div>
             )
         

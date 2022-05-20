@@ -1,4 +1,4 @@
-export default function FilmDay (  { weekday, date, hour1, hour2 } ) {
+export default function FilmDay (  { weekday, date, showtime1, showtime2 } ) {
 
     return (
         <>
@@ -7,10 +7,10 @@ export default function FilmDay (  { weekday, date, hour1, hour2 } ) {
             <span>{weekday} - {date}</span>
             <div className="hours">
                 <div className="hour">
-                    <span>{hour1}</span>
+                    <span>{showtime1}</span>
                 </div>
                 <div className="hour">
-                    <span>{hour2}</span>
+                    <span>{showtime2}</span>
                 </div>
 
             </div>
