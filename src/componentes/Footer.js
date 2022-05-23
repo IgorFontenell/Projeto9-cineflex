@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function Footer ( { title, posterURL } ) {
+export default function Footer ( { title, posterURL, data, hour } ) {
 
     return (
             <FooterDiv>
@@ -8,6 +8,7 @@ export default function Footer ( { title, posterURL } ) {
                     <img src={posterURL} alt="Imagem Carregando..." width="48" height="72" />
                 </div>
                 <span>{title}</span>
+                <span>{data}  {hour}</span>
             </FooterDiv>
     );
 
@@ -21,6 +22,7 @@ const FooterDiv = styled.div`
     display: flex; 
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
     padding-left: 10px;
     position: fixed;
     bottom: 0px;

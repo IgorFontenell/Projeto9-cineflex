@@ -3,7 +3,7 @@ import styled from "styled-components";
 import React from "react";
 
 
-export default function FilmDay (  { idFilm, weekday, date, showtime1, showtime2 } ) {
+export default function FilmDay (  { weekday, date, showtime1, showtime2, id1, id2 } ) {
 
     const [day, setDay] = React.useState("");
     const [hour, setHour] = React.useState("");
@@ -15,7 +15,7 @@ export default function FilmDay (  { idFilm, weekday, date, showtime1, showtime2
         setHour(hour);
         
     }
-    console.log(weekday,hour);
+    
 
     return (
         
@@ -23,20 +23,19 @@ export default function FilmDay (  { idFilm, weekday, date, showtime1, showtime2
         <Data>
             <span>{weekday} - {date}</span>
             <Hours>
+                <Link to={`/assentos/${id1}`}>
                     <Hour onClick={() => Click(weekday, showtime1)}>
                         <span>{showtime1}</span>
                     </Hour>
+                </Link>
+                <Link to={`/assentos/${id2}`}>
                     <Hour>
                         <span>{showtime2}</span>
                     </Hour>
+                 </Link>
             </Hours>
         </Data>
-        
-        
-        
-        
-       
-        
+
     );
 
 
@@ -60,6 +59,10 @@ const Data = styled.div`
 `
 const Hours = styled.div`
     display: flex;
+    
+    a {
+        text-decoration: none;
+    }
     
     
 `;

@@ -1,33 +1,59 @@
+import { useParams, Link } from "react-router-dom";
+import React from 'react';
+import axios from "axios";
 import styled from "styled-components";
 import Footer from "./Footer";
 import Type from "./Type";
+import SeatChairs from "./SeatChairs";
+import FilmDay from "./FilmDay";
+import SeatChair from "./SeatChair";
 
 
 
 export default function ChairSection() {
 
-    let arraySeats = [];
-    for (let i = 1; i < 51; i++) {
-        if (i < 10) {
-        arraySeats.push(`0${i}`);
-        } else {
-        arraySeats.push(i);
-        }
-        
-    }
+    //Getting the id of the section
+    const { idSessao } = useParams();
+    //Creating a estate variable of the state of the seats that is going to be written in our HTML
+    const [seats, setSeats] = React.useState([]);
     
+    
+    
+   
+    //Here we have a function that happens only once. It get the info of the server and runs the code SeatChairs with the response as parameter
+    React.useEffect((() => {
+        
+        let promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
+        promise.then(answered => {
+            let test = SeatChairs(answered);
+            setSeats([...test]);
+        });
+         
+       
+    }), []);
+    
+    
+      
+    
+    
+    
+
+
+
+
+
 
     return(
         <Container>
             <h2>Selecione o(s) assento(s)</h2>
             <Seats>
                 <SeatSeaction>
-                    {arraySeats.map(value => <div><span>{value}</span></div>)}
+                     {(seats === []) ? (<span>Carregando....</span>): (seats.map(value => <SeatChair condition={value.condition} index={value.index} value={value.value} />))} 
                 </SeatSeaction>
                 <Meaning>
-                    <Type cor="#8DD7CF" text="Selecionado" />
-                    <Type cor="#C3CFD9" text="Disponível" />
-                    <Type cor="#FBE192" text="Indisponível" />
+                    <Type cor="#8DD7CF" text="Selecionado" border="#1AAE9E" />
+                    <Type cor="#C3CFD9" text="Disponível" border="#7B8B99" />
+                    <Type cor="#FBE192" text="Indisponível" border="#F7C52B" />
                 </Meaning>
                 <Buyer>
                     <span>Nome do comprador:</span>
@@ -35,9 +61,11 @@ export default function ChairSection() {
                     <span>CPF do comprador:</span>
                     <input placeholder="Digite o seu CPF..."></input>
                 </Buyer>
+                <Link to="/sucesso">
                 <Button>
                     <span>Reservar assento(s)</span>  
                 </Button>
+                </Link>
             </Seats>
             <Footer />
         
@@ -60,7 +88,9 @@ const Container = styled.div`
     margin: 20px 0px;
     font-size: 24px;
     font-family: 'Roboto', sans-serif;
-
+    }
+    a {
+        text-decoration: none;
     }
 `;
 const Seats = styled.div`
@@ -82,7 +112,7 @@ const SeatSeaction = styled.div`
     margin: 2px 16px;
 
     div {
-    background-color: #C3CFD9;
+    background-color: ${props => props.cor};
     width: 26px;
     height: 26px;
     border-radius: 12px;
@@ -91,7 +121,9 @@ const SeatSeaction = styled.div`
     justify-content: center;
     margin: 8px 4px;
     border: 1px solid #808F9D;
+    cursor: pointer;
     }
+   
     span {
     font-size: 11px;
     font-family: 'Roboto', sans-serif;
@@ -151,4 +183,6 @@ const Button = styled.div`
     background-color: #E8833A;
     border-radius: 3px;
     font-size: 18px;
+
+    
 `;

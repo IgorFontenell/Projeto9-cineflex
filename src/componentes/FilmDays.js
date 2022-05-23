@@ -31,7 +31,7 @@ export default function FilmDays () {
             </Container>) : (
                     <Container>
                         <h2>Selecione o horário</h2>
-                       {filmInfo.days.map((value, index) => <FilmDay key={index} idFilm={idFilm} weekday={value.weekday} date={value.date} showtime1={value.showtimes[0].name} showtime2={value.showtimes[1].name} />)}
+                       {filmInfo.days.map((value, index) => <FilmDay key={index} weekday={value.weekday} date={value.date} showtime1={value.showtimes[0].name} id1={value.showtimes[0].id} showtime2={value.showtimes[1].name} id2={value.showtimes[1].id} />)}
                         <Footer title={title} posterURL={posterURL}/>
                 </Container>
             )

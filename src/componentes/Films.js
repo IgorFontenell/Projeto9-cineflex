@@ -19,7 +19,7 @@ export default function Films () {
         setFilm([...object.data])});
     },[])
 
-    console.log(film);
+    
 
    
     return (
