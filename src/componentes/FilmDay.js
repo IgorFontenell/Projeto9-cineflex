@@ -1,24 +1,39 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import React from "react";
 
 
-export default function FilmDay (  { weekday, date, showtime1, showtime2 } ) {
+export default function FilmDay (  { idFilm, weekday, date, showtime1, showtime2 } ) {
+
+    const [day, setDay] = React.useState("");
+    const [hour, setHour] = React.useState("");
+
+    
+
+    function Click (day, hour) {
+        setDay(day);
+        setHour(hour);
+        
+    }
+    console.log(weekday,hour);
 
     return (
         
-        
+       
         <Data>
             <span>{weekday} - {date}</span>
             <Hours>
-                <Hour>
-                    <span>{showtime1}</span>
-                </Hour>
-                <Hour>
-                    <span>{showtime2}</span>
-                </Hour>
-
+                    <Hour onClick={() => Click(weekday, showtime1)}>
+                        <span>{showtime1}</span>
+                    </Hour>
+                    <Hour>
+                        <span>{showtime2}</span>
+                    </Hour>
             </Hours>
-
         </Data>
+        
+        
+        
         
        
         
@@ -45,6 +60,8 @@ const Data = styled.div`
 `
 const Hours = styled.div`
     display: flex;
+    
+    
 `;
 const Hour = styled.div`
 
@@ -61,6 +78,6 @@ const Hour = styled.div`
     color: #FFFFFF;
     font-size: 18px;
     }
-
-
 `;
+
+

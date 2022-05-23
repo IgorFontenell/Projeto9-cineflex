@@ -10,7 +10,7 @@ import Footer from "./Footer";
 export default function FilmDays () {
 
     let { idFilm } = useParams();
-    console.log(idFilm);
+    
     const [filmInfo, setFilmInfo] = React.useState(0);
     
     
@@ -19,7 +19,7 @@ export default function FilmDays () {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilm}/showtimes`);
         promise.then(ansewerBack => setFilmInfo({...ansewerBack.data}));
     }),[])
-    console.log(filmInfo);
+    
     const { posterURL, title } = filmInfo;
    
 
@@ -31,7 +31,7 @@ export default function FilmDays () {
             </Container>) : (
                     <Container>
                         <h2>Selecione o horário</h2>
-                       {filmInfo.days.map((value, index) => <FilmDay key={index} weekday={value.weekday} date={value.date} showtime1={value.showtimes[0].name} showtime2={value.showtimes[1].name} />)}
+                       {filmInfo.days.map((value, index) => <FilmDay key={index} idFilm={idFilm} weekday={value.weekday} date={value.date} showtime1={value.showtimes[0].name} showtime2={value.showtimes[1].name} />)}
                         <Footer title={title} posterURL={posterURL}/>
                 </Container>
             )
